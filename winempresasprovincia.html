@@ -22,7 +22,33 @@
             margin:0;
 			overflow:hidden;
         }
-       </style>
+       </style> 
+       <script>
+    // ===============================
+    // Protección básica contra inspección
+    // ===============================
+    document.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+        alert("Acceso restringido 🚫");
+    });
+
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123) return false; // F12
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+    };
+
+    // ===============================
+    // Contraseña ofuscada
+    // ===============================
+    var p = atob("bWF0ZW8yMDE4"); // "mateo2018" en base64
+    var intento = prompt("Introduce la contraseña:");
+    if (intento !== p) {
+      document.write("<h1>Acceso denegado 🚫</h1>");
+      window.stop();
+    }
+  </script>
 		
         <title>Geoportal Pext || Provincia WE </title>
     </head>
